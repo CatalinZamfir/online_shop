@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.service;
 
 import org.example.entity.Invoices;
 import org.example.repository.Repository;

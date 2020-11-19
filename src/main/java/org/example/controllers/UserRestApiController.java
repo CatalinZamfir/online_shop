@@ -3,6 +3,7 @@ package org.example.controllers;
 import org.example.entity.UserEntity;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,9 @@ public class UserRestApiController {
 
 
     @GetMapping("/api/users")
-    public List<UserEntity> getAllUsers(){
-        return userRepository.findAll();
+    public ResponseEntity<List<UserEntity>> getAllUsers(){
+        //return userRepository.findAll();
+        return  ResponseEntity.status(205).body(userRepository.findAll());
     }
 
     @PostMapping("/api/users")

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+</head>
+<body>
+<h1>users</h1>
+<p th:text="${myName}">this text will be replaced</p>
+<p th:text="#{users.page.title}"></p>
+<table>
+<tr th:each="u:${userList}">
+    <td th:text="${u.userId}">  </td>
+    <td th:text="${u.name}">  </td>
+    <td th:text="${u.age}">  </td>
+</tr>
+</table>
+</body>
+</html>

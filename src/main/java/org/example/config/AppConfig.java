@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @ComponentScan("org.example")
-@Import({DatabaseConfig.class})
+@Import({DatabaseConfig.class, WebConfig.class})
 public class AppConfig {
 
     @Bean("dbConnection1")
