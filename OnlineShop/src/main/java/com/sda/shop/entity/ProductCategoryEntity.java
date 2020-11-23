@@ -1,6 +1,8 @@
 package com.sda.shop.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -10,6 +12,8 @@ public class ProductCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productCategoryId;
+    @Size(min = 2, max = 6, message = "Description must be at least min 2 and max 6 chars. ")
+    @NotBlank(message = "Description cannot be empty. ")
     private String description;
     @OneToMany(mappedBy = "productCategory")
     private List<ProductsEntity> products;

@@ -8,6 +8,12 @@
 <body>
 <form method="post" action="/categories/save" th:object="${category}">
     <input type="hidden" name="productId" th:field="*{productCategoryId}">
+
+    <span th:if="${#fields.hasErrors('description')}"
+          th:each="err:${#fields.errors('description')}"
+          th:text="${err}"></span>
+
+    <br/>
     <label for="description">Category Description</label>
     <input type="text" name="description" placeholder="category description" id="description" th:field="*{description}">
     <input type="submit" value="save">
