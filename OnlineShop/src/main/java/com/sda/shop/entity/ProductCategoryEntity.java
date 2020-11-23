@@ -12,7 +12,7 @@ public class ProductCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productCategoryId;
-    @Size(min = 2, max = 6, message = "Description must be at least min 2 and max 6 chars. ")
+    @Size(min = 2, max = 12, message = "Description must be at least min 2 and max 6 chars. ")
     @NotBlank(message = "Description cannot be empty. ")
     private String description;
     @OneToMany(mappedBy = "productCategory")

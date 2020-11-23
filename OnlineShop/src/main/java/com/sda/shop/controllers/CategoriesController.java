@@ -2,10 +2,12 @@ package com.sda.shop.controllers;
 
 
 import com.sda.shop.entity.ProductCategoryEntity;
+import com.sda.shop.events.AddCategoryEvent;
 import com.sda.shop.repository.ProductCategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ public class CategoriesController {
 
     @Autowired
     private ProductCategoryRepository categoryRepository;
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     public CategoriesController() {
         loger.info(getClass().getSimpleName() + " created");
@@ -50,6 +54,7 @@ public class CategoriesController {
             return modelAndView;
         }
         categoryRepository.save(productCategoryEntity);
+        applicationEventPublisher.publishEvent(new AddCategoryEvent(this,productCategoryEntity.getDescription()));
         return modelAndView;
     }
 
@@ -59,5 +64,13 @@ public class CategoriesController {
         modelAndView.addObject("category", categoryRepository.findById(id).get());
         return modelAndView;
     }
+
+    @GetMapping("/categories/delete/{id}")
+    public ModelAndView deleteCategory(@PathVariable(name="id") Integer categoryId) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/categories");
+        categoryRepository.deleteById(categoryId);
+        return modelAndView;
+    }
+
 
 }
