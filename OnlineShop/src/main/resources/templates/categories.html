@@ -17,6 +17,8 @@
         <td th:text="${cat.getDescription()}"></td>
         <td><a th:href="@{'/categories/edit/' + ${cat.getProductCategoryId()}}"> Edit </a>
         <td><a th:href="@{'/categories/delete/' + ${cat.getProductCategoryId()}}"> Delete </a>
+        &nbsp; &nbsp; &nbsp;
+        <td><a th:href="@{'/view-products/' + ${cat.getProductCategoryId()}}"> View </a>
         </td>
     </tr>
 </table>

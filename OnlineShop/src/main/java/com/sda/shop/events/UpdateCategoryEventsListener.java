@@ -4,11 +4,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddCategoryEventsListener implements ApplicationListener<AddCategoryEvent> {
+public class UpdateCategoryEventsListener implements ApplicationListener<EditCategoryEvent> {
 
 
     @Override
-    public void onApplicationEvent(AddCategoryEvent event) {
+    public void onApplicationEvent(EditCategoryEvent event) {
         System.out.println(getClass().getSimpleName() + event);
     }
 

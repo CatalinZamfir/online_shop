@@ -3,6 +3,7 @@ package com.sda.shop.controllers;
 
 import com.sda.shop.entity.ProductCategoryEntity;
 import com.sda.shop.events.AddCategoryEvent;
+import com.sda.shop.events.EditCategoryEvent;
 import com.sda.shop.repository.ProductCategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,13 +49,17 @@ public class CategoriesController {
     @PostMapping("/categories/save")
     public ModelAndView saveCategory(@Valid @ModelAttribute("category") ProductCategoryEntity productCategoryEntity, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("redirect:/categories");
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             modelAndView.setViewName("categories-form");
             modelAndView.addObject("category", productCategoryEntity);
             return modelAndView;
         }
+        if(productCategoryEntity.getProductCategoryId() == null){
+        applicationEventPublisher.publishEvent(new AddCategoryEvent(this, productCategoryEntity.getDescription()));
+        }else {
+            applicationEventPublisher.publishEvent(new EditCategoryEvent(this, productCategoryEntity.getDescription()));
+        }
         categoryRepository.save(productCategoryEntity);
-        applicationEventPublisher.publishEvent(new AddCategoryEvent(this,productCategoryEntity.getDescription()));
         return modelAndView;
     }
 
@@ -66,7 +71,7 @@ public class CategoriesController {
     }
 
     @GetMapping("/categories/delete/{id}")
-    public ModelAndView deleteCategory(@PathVariable(name="id") Integer categoryId) {
+    public ModelAndView deleteCategory(@PathVariable(name = "id") Integer categoryId) {
         ModelAndView modelAndView = new ModelAndView("redirect:/categories");
         categoryRepository.deleteById(categoryId);
         return modelAndView;
