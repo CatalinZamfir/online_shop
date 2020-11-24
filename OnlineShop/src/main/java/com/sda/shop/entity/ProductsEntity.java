@@ -1,6 +1,7 @@
 package com.sda.shop.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name="products")
@@ -9,9 +10,15 @@ public class ProductsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
+    @Size (min = 2, max = 20, message = "min 2, max 20 characters")
+    @NotBlank(message = " not blank ")
     private String name;
+    @Size (min = 2, max = 200, message = "min 2, max 20 characters")
     private String description;
+    @Min(value = 1, message = "min 1 digits")
+    @Max(value = 9, message = "max 9 digits")
     private Double price;
+    @Max(value = 3, message = "max 3 digits")
     private Integer productStock;
     @ManyToOne
     @JoinColumn(name="productCategoryId", insertable = false, updatable = false)
