@@ -17,17 +17,18 @@
         <th>Action</th>
     </tr>
     <tr th:each="p:${category.getProduct()}">
+        <td th:text="${p.getProductId()}"></td>
         <td th:text="${p.getName()}"></td>
         <td th:text="${p.getDescription()}"></td>
-        <td th:text="${p.getPrice()()}"></td>
-        <td th:text="${p.getProductStock()()()}"></td>
+        <td th:text="${p.getPrice()}"></td>
+        <td th:text="${p.getProductStock()}"></td>
         <td>
             <a th:href="@{'/products/edit/' + ${p.getProductId()}}"> Edit </a>
             <a th:href="@{'/products/delete/' + ${p.getProductId()}}"> Delete </a>
         </td>
     </tr>
 </table>
-<a href="/prducts/add"> Add product</a>
+<a th:href="@{'/products/add/' + ${category.getProductCategoryId()}}"> Add product</a>
 
 </body>
 </html>

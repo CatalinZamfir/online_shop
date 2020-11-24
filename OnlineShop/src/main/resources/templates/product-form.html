@@ -5,15 +5,22 @@
     <title>Add Product</title>
 </head>
 <body>
-<form>
+<form method="post" action="/products/save" th:object="${product}" >
+    <input type="hidden" name="categoryId" th:field="*{productCategoryId}">
+    <input type="hidden" name="productId" th:field="*{productId}">
+
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="product name"> <br/>
+    <input type="text" id="name" name="name" placeholder="product name" th:field="*{name}" > <br/>
+
     <label for="description">Description</label>
-    <input type="text" id="description" name="description" placeholder="product description"> <br/>
+    <input type="text" id="description" name="description" placeholder="product description" th:field="*{description}"> <br/>
+
     <label for="price">Price</label>
-    <input type="number" id="price" name="price" placeholder="product price"> <br/>
+    <input type="number" id="price" name="price" placeholder="product price" th:field="*{price}"> <br/>
+
     <label for="stock">Stock</label>
-    <input type="number" id="stock" name="stock" placeholder="product stock"> <br/>
+    <input type="number" id="stock" name="stock" placeholder="product stock" th:field="*{productStock}"> <br/>
+
     <input type="submit"> <br/>
 
 </form>

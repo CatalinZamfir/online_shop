@@ -14,9 +14,18 @@ public class ProductsEntity {
     private Double price;
     private Integer productStock;
     @ManyToOne
-    @JoinColumn(name="productCategoryId")
+    @JoinColumn(name="productCategoryId", insertable = false, updatable = false)
     private ProductCategoryEntity productCategory;
 
+    private Integer productCategoryId;
+
+    public Integer getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(Integer productCategoryId) {
+        this.productCategoryId = productCategoryId;
+    }
 
     public Integer getProductId() {
         return productId;
