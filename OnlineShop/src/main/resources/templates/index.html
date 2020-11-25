@@ -9,7 +9,7 @@
 <p th:text="#{category.list}"></p>
 <ul>
     <li th:each="c:${categories}">
-        <a th:text="${c.getDescription()}" th:href="@{'/product/'+${c.getProductCategoryId()}}"></a>
+        <a th:text="${c.getDescription()}" th:href="@{'/categories/'}"></a>
     </li>
 </ul>
 </body>
