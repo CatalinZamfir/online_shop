@@ -18,10 +18,10 @@
     </span>
 
     <br/>
-    <label for="description">Category Description</label>
-    <input type="text" name="description" placeholder="category description"
+    <label for="description" th:text="#{CategoryDescription}">Category Description</label>
+    <input type="text" name="description" th:placeholder="#{CategoryDescription}"
            id="description" th:field="*{description}">
-    <input type="submit" value="save">
+    <input type="submit" th:value="#{Save}" >
 </form>
 
 </body>

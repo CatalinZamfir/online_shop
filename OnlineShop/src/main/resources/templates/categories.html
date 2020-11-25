@@ -5,24 +5,24 @@
     <title>Categories</title>
 </head>
 <body>
-<h1>Category List</h1>
+<h1 th:text="#{category.list}"></h1>
 <table>
     <tr>
         <th>ID</th>
-        <th>Description</th>
-        <th>Actions</th>
+        <th th:text="#{Description}">Description</th>
+        <th th:text="#{Actions}">Actions</th>
     </tr>
     <tr th:each="cat:${categoryList}">
         <td th:text="${cat.getProductCategoryId()}"></td>
         <td th:text="${cat.getDescription()}"></td>
-        <td><a th:href="@{'/categories/edit/' + ${cat.getProductCategoryId()}}"> Edit </a>
-        <td><a th:href="@{'/categories/delete/' + ${cat.getProductCategoryId()}}"> Delete </a>
+        <td><a th:href="@{'/categories/edit/' + ${cat.getProductCategoryId()}}" th:text="#{Edit}"> Edit </a></td>
+        <td><a th:href="@{'/categories/delete/' + ${cat.getProductCategoryId()}}" th:text="#{Delete}"> Delete </a> </td>
         &nbsp; &nbsp; &nbsp;
-        <td><a th:href="@{'/view-products/' + ${cat.getProductCategoryId()}}"> View </a>
+        <td><a th:href="@{'/view-products/' + ${cat.getProductCategoryId()}}" th:text="#{View}"> View </a>
         </td>
     </tr>
 </table>
-<a href="/categories/add">Add Category</a>
+<a href="/categories/add" th:text="#{AddCategory}">Add Category</a>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title th:text="#{Products}">Products</title>
 </head>
 <body>
 <h1>Products</h1>
@@ -10,11 +10,11 @@
 <table>
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Action</th>
+        <th th:text="#{Name}">Name</th>
+        <th th:text="#{Description}">Description</th>
+        <th th:text="#{Price}">Price</th>
+        <th th:text="#{Stock}">Stock</th>
+        <th th:text="#{Actions}">Action</th>
     </tr>
     <tr th:each="p:${category.getProduct()}">
         <td th:text="${p.getProductId()}"></td>
@@ -23,12 +23,12 @@
         <td th:text="${p.getPrice()}"></td>
         <td th:text="${p.getProductStock()}"></td>
         <td>
-            <a th:href="@{'/products/edit/' + ${p.getProductId()}}"> Edit </a>
-            <a th:href="@{'/products/delete/' + ${p.getProductId()}}"> Delete </a>
+            <a th:href="@{'/products/edit/' + ${p.getProductId()}}" th:text="#{Edit}"> Edit </a>
+            <a th:href="@{'/products/delete/' + ${p.getProductId()}}" th:text="#{Delete}"> Delete </a>
         </td>
     </tr>
 </table>
-<a th:href="@{'/products/add/' + ${category.getProductCategoryId()}}"> Add product</a>
+<a th:href="@{'/products/add/' + ${category.getProductCategoryId()}}" th:text="#{AddProduct}"> Add product</a>
 
 </body>
 </html>
