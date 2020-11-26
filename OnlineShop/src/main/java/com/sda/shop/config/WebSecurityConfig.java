@@ -22,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/login")
                 .permitAll();
         http.authorizeRequests()
+                .antMatchers("/view-products/**")
+                .hasRole("ADMIN");
+        http.authorizeRequests()
                 .anyRequest()
                 .authenticated();
         //http.httpBasic();
@@ -32,6 +35,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .defaultSuccessUrl("/")
                 .failureForwardUrl("/login");
+        http.logout()
+                .logoutUrl("/logout")
+                .permitAll();
 
     }
 
@@ -47,8 +53,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("SDA")
                 .password(passwordEncoder().encode("1234"))
                 .roles("USER")
+
+                .and()
+                .withUser("catalin")
+                .password(passwordEncoder().encode("1234"))
+                .roles("USER", "ADMIN")
+
                 .and()
                 .passwordEncoder(passwordEncoder());
+
     }
 
 
