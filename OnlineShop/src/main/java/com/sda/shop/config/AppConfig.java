@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @ComponentScan("com.sda.shop")
-@Import({DataBaseConfig.class, WebConfig.class})
+@Import({DataBaseConfig.class, WebConfig.class, WebSecurityConfig.class})
 public class AppConfig {
 
 }
