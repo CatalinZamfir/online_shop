@@ -10,16 +10,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/","/login")
+                .antMatchers("/","/login", "/login-submit", "/register", "/editUser/*","/login-error")
                 .permitAll();
         http.authorizeRequests()
                 .antMatchers("/view-products/**")
@@ -34,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/")
-                .failureForwardUrl("/login");
+                .failureForwardUrl("/login-error");
         http.logout()
                 .logoutUrl("/logout")
                 .permitAll();
@@ -49,18 +54,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("SDA")
-                .password(passwordEncoder().encode("1234"))
-                .roles("USER")
+//        auth.inMemoryAuthentication()
+//                .withUser("SDA")
+//                .password(passwordEncoder().encode("1234"))
+//                .roles("USER")
+//
+//                .and()
+//                .withUser("catalin")
+//                .password(passwordEncoder().encode("1234"))
+//                .roles("USER", "ADMIN")
+//
+//                .and()
+//                .passwordEncoder(passwordEncoder());
 
-                .and()
-                .withUser("catalin")
-                .password(passwordEncoder().encode("1234"))
-                .roles("USER", "ADMIN")
-
-                .and()
-                .passwordEncoder(passwordEncoder());
+        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
 
     }
 
